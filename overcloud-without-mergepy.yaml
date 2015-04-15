@@ -568,6 +568,7 @@ resources:
           NeutronL3HA: {get_param: NeutronL3HA}
           NeutronNetworkType: {get_param: NeutronNetworkType}
           NeutronTunnelTypes: {get_param: NeutronTunnelTypes}
+          NodeIndex: "%index%"
           NovaPassword: {get_param: NovaPassword}
           NtpServer: {get_param: NtpServer}
           PublicVirtualInterface: {get_param: PublicVirtualInterface}
@@ -628,6 +629,7 @@ resources:
           # L3 HA and Failover is not relevant for Computes, should be removed
           NeutronAllowL3AgentFailover: {get_param: NeutronAllowL3AgentFailover}
           NeutronL3HA: {get_param: NeutronL3HA}
+          NodeIndex: "%index%"
           NovaApiHost: {get_attr: [ControlVirtualIP, fixed_ips, 0, ip_address]}
           NovaComputeDriver: {get_param: NovaComputeDriver}
           NovaComputeExtraConfig: {get_param: NovaComputeExtraConfig}
@@ -659,6 +661,7 @@ resources:
           Flavor: {get_param: OvercloudBlockStorageFlavor}
           RabbitPassword: {get_param: RabbitPassword}
           RabbitUserName: {get_param: RabbitUserName}
+          NodeIndex: "%index%"
           NtpServer: {get_param: NtpServer}
 
   ObjectStorage:
@@ -676,6 +679,7 @@ resources:
           PartPower: {get_param: SwiftPartPower}
           Image: {get_param: SwiftStorageImage}
           Replicas: { get_param: SwiftReplicas}
+          NodeIndex: "%index%"
           NtpServer: {get_param: NtpServer}
 
   CephStorage:
@@ -688,6 +692,7 @@ resources:
           Image: {get_param: CephStorageImage}
           KeyName: {get_param: KeyName}
           Flavor: {get_param: OvercloudCephStorageFlavor}
+          NodeIndex: "%index%"
           NtpServer: {get_param: NtpServer}
 
   allNodesConfig:
