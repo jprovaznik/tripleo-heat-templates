@@ -396,6 +396,9 @@ parameters:
     default: 'false'
     description: Set to true to enable package installation via Puppet
     type: boolean
+  update_timestamp:
+    type: string
+    default: ''
 
 resources:
 
@@ -786,6 +789,27 @@ resources:
                 tripleo::loadbalancer::public_virtual_interface: {get_input: public_virtual_interface}
                 tripleo::loadbalancer::public_virtual_ip: {get_input: public_virtual_ip}
                 enable_package_install: {get_input: enable_package_install}
+
+  update_config:
+    type: OS::Heat::SoftwareConfig
+    properties:
+      group: script
+      inputs:
+        - name: update_after_time
+          description: Timestamp of the most recent update request
+      config:
+        get_file: manifests/do_update.sh
+
+  update_deployment:
+    type: OS::Heat::SoftwareDeployment
+    properties:
+      #actions:
+      #  - UPDATE
+      config: {get_resource: update_config}
+      server: {get_resource: Controller}
+      signal_transport: NO_SIGNAL
+      input_values:
+        update_after_time: {get_param: update_timestamp}
 
 outputs:
   ip_address:

@@ -506,6 +506,10 @@ parameters:
     constraints:
       - custom_constraint: nova.flavor
 
+  update_timestamp:
+    type: string
+    default: ''
+
 resources:
 
   HeatAuthEncryptionKey:
@@ -588,6 +592,7 @@ resources:
           SwiftPartPower: {get_param: SwiftPartPower}
           SwiftPassword: {get_param: SwiftPassword}
           SwiftReplicas: { get_param: SwiftReplicas}
+          update_timestamp: { get_param: update_timestamp}
           VirtualIP: {get_attr: [ControlVirtualIP, fixed_ips, 0, ip_address]}
           PublicVirtualIP: {get_attr: [PublicVirtualIP, fixed_ips, 0, ip_address]}
 
@@ -643,6 +648,7 @@ resources:
           RabbitUserName: {get_param: RabbitUserName}
           SnmpdReadonlyUserName: {get_param: SnmpdReadonlyUserName}
           SnmpdReadonlyUserPassword: {get_param: SnmpdReadonlyUserPassword}
+          update_timestamp: { get_param: update_timestamp}
 
   BlockStorage:
     type: OS::Heat::ResourceGroup
